@@ -1,0 +1,2 @@
+# ZbieraczCoinow
+Pierwsza gra.
