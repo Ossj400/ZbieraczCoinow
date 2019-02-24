@@ -67,6 +67,19 @@ public class Enemy : MonoBehaviour
     {
         print("Hi we are in goto");
         transform.LookAt(target);
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        RaycastHit Buddy;
+
+        if(Physics.Raycast(transform.position, fwd,out Buddy))
+        {
+          if (  Buddy.transform.tag != PlayerTag)
+            {
+                curState = State.LOOKFOR;
+                return;
+            }
+        }
+
+
         if (Vector3.Distance(target.position, transform.position) > attackDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);

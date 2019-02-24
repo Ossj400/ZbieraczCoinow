@@ -60,6 +60,18 @@ public class Player : MonoBehaviour
 
 
     }
+                      /*
+    void Update()
+
+    {
+        if(health < 1)
+        {
+            Application.LoadLevel("111");
+
+        }
+
+    }
+                     */
 
 
     float CalculateJump()
