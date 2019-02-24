@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657737, g: 0.49641174, b: 0.5748149, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657707, g: 0.49641138, b: 0.5748148, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -390,11 +390,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  speed: 0.5
+  speed: 3.5
   goToDistance: 13
-  attackDistance: 4
+  attackDistance: 2
   target: {fileID: 0}
   PlayerTag: Player
+  attackTimer: 2
 --- !u!1 &589679331
 GameObject:
   m_ObjectHideFlags: 0
