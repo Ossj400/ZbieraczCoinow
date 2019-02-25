@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
         ATTACK
     }
     public State curState;
-    public float speed = .5f;
-    public float goToDistance = 13;
+    public float speed = .8f;
+    public float goToDistance = 30;
     public float attackDistance = 1;
     public Transform target;
     public string PlayerTag = "Player";
