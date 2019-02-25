@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerTransform.Rotate(0,(Mathf.Clamp( (Input.GetAxis("Horizontal")*5),-3,13)), 0);
+        PlayerTransform.Rotate(0,(Mathf.Clamp( (Input.GetAxis("Horizontal")*5),-3,16)), 0);
 
         Vector3 targetVelocity = new Vector3(0,0,Input.GetAxis("Vertical"));
         targetVelocity = PlayerTransform.TransformDirection(targetVelocity);
