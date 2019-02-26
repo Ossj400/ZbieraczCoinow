@@ -45,10 +45,10 @@ public class Player : MonoBehaviour
 
         _rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
 
-   
-        
 
-        if (Input.GetButton("Jump") && grounded == true)
+
+        //   if (Input.GetButton("Jump") && grounded == true)
+        if (Input.touchCount == 1 && grounded == true)
         {
             _rigidbody.velocity = new Vector3(velocity.x, CalculateJump(), velocity.z);
         }
