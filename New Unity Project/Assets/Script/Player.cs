@@ -1,6 +1,8 @@
 ﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +11,11 @@ public class Player : MonoBehaviour
     public float maxVelocityChange = 10;
     public float jumpHeight = 2;
     public float points = 0;
+    private int count;
+    public Text countText;
+    public Text winText;
+    public AudioSource coinBing;
+    public AudioSource backgroundMusic;
 
 
     private Rigidbody _rigidbody;
@@ -25,7 +32,9 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
         _rigidbody.freezeRotation = true;
-
+        count = 0;
+        countText.text = "Skradzione koiny : " + count.ToString();
+        winText.text = "";
 
     }
 
@@ -92,10 +101,26 @@ public class Player : MonoBehaviour
     {
         if (Tomek.tag == "Coin")
         {
-
+            PlayCoinBing();
+            count = count + 1;
+            countText.text = "Skradzione koiny : " + count.ToString();
+            
             points = points + 5;
             Destroy(Tomek.gameObject);
+
+            if (count > 41  )
+            {
+                winText.text = "Wszystkie Koiny Twoje!";
+            }
+
+
         }
+      
     }
+    public void PlayCoinBing()
+    {
+        coinBing.Play();
+    }
+  
 
 }
