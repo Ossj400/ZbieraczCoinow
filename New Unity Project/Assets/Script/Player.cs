@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
             points = points + 5;
             Destroy(Tomek.gameObject);
 
-            if (count > 41  )
+            if (count > 43  )
             {
                 winText.text = "Wszystkie Koiny Twoje!";
             }
@@ -121,6 +121,9 @@ public class Player : MonoBehaviour
     {
         coinBing.Play();
     }
-  
+    public void PlayBackgroundMusic()
+    {
+        backgroundMusic.Play();
+    }
 
 }
