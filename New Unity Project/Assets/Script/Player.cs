@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     public AudioSource coinBing;
     public AudioSource backgroundMusic;
 
+    static float z;
+    static float x;
+        static float y;
+
+
 
     private Rigidbody _rigidbody;
     private bool grounded;
@@ -41,27 +46,46 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        PlayerTransform.Rotate(0,(Mathf.Clamp( (Input.GetAxis("Horizontal")*5),-3,16)), 0);
-
-        Vector3 targetVelocity = new Vector3(0,0,Input.GetAxis("Vertical"));
-        targetVelocity = PlayerTransform.TransformDirection(targetVelocity);
-        targetVelocity = targetVelocity * speed;
-        Vector3 velocity = _rigidbody.velocity;
-        Vector3 velocityChange = targetVelocity - velocity;
-        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-        velocityChange.y = 0;
-
-        _rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-
-
-
-         if (Input.GetButton("Jump") && grounded == true)
-       // if (Input.touchCount == 1 && grounded == true)
+        if (SystemInfo.deviceType == DeviceType.Desktop)
         {
-            _rigidbody.velocity = new Vector3(velocity.x, CalculateJump(), velocity.z);
-        }
+            PlayerTransform.Rotate(0, (Mathf.Clamp((Input.GetAxis("Horizontal") * 5), -3, 16)), 0);
 
+            Vector3 targetVelocity = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            targetVelocity = PlayerTransform.TransformDirection(targetVelocity);
+            targetVelocity = targetVelocity * speed;
+            Vector3 velocity = _rigidbody.velocity;
+            Vector3 velocityChange = targetVelocity - velocity;
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.y = 0;
+            x = velocityChange.x;
+            y = velocityChange.y;
+            z = velocityChange.z;
+
+            _rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+
+
+
+            if (Input.GetButton("Jump") && grounded == true)
+            // if (Input.touchCount == 1 && grounded == true)
+            {
+                _rigidbody.velocity = new Vector3(velocity.x, CalculateJump(), velocity.z);
+            }
+        }
+        
+             else
+             {
+            // Player movement in mobile devices
+            // Building of force vector 
+            Vector3 movement = new Vector3(Input.acceleration.x, 0.0f, Input.acceleration.y);
+            // Adding force to rigidbody
+            _rigidbody.AddForce(movement * speed * Time.deltaTime);
+
+            if(Input.touchCount == 1 && grounded == true)
+            {
+                _rigidbody.velocity = new Vector3(x, CalculateJump(),z);
+            }
+        }
 
         _rigidbody.AddForce(new Vector3(0, -gravity * _rigidbody.mass, 0));
         grounded = false;

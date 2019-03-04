@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/111.unity
     guid: 94de5ffc93882c04aacfc225c8177781
+  - enabled: 1
+    path: Assets/andoid kulka.unity
+    guid: b51e3a2fdc6608a48be53e7bb1174622
   m_configObjects: {}
