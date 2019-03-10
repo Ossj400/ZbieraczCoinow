@@ -13,14 +13,14 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 0
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: cc2d009b31ce2134a9438a34a78632a0, type: 3}
+        m_Texture: {fileID: 2800000, guid: f49b46ff67c24a84ba0cdb7301ab7337, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Illum:
@@ -28,10 +28,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c65e186198f501046a0aba89c6335cac, type: 3}
+        m_Texture: {fileID: 2800000, guid: b398e4f50556e427392e64d487a9678f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Emission: 2
+    - _Emission: 1
     m_Colors:
-    - _Color: {r: 0.754717, g: 0.6601464, b: 0.5517978, a: 0.7411765}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}

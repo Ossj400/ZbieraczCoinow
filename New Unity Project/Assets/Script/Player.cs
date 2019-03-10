@@ -3,21 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityStandardAssets.ImageEffects;
 
 public class Player : MonoBehaviour
 {
+
+
+    
     public float speed = 10;
     public float gravity = 10;
     public float maxVelocityChange = 10;
     public float jumpHeight = 2;
     public float points = 0;
-    private int count;
+    public static float count;
+    public static float camCol=1;
+    public static float camCol2;
+    public static float hpCol=1;
+    public static float heatlth2;
+    
+
     public Text countText;
     public Text winText;
     public AudioSource coinBing;
     public AudioSource backgroundMusic;
 
-    static float z;
+
+
+
+    public static float z;
     static float x;
         static float y;
 
@@ -26,13 +39,14 @@ public class Player : MonoBehaviour
     private Rigidbody _rigidbody;
     private bool grounded;
 
-    private bool dead; // true or fasle call
-    public int health; // player health 
+ 
+    public float health = 100; // player health 
     private Transform PlayerTransform;
 
     // Start is called before the first frame update
     void Start()
     {
+    
         PlayerTransform = GetComponent<Transform>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
@@ -46,9 +60,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        health = Mathf.Clamp(health, 0, 100);
+        hpCol = (health / 100 );
+        hpCol = Mathf.Clamp(hpCol, 0.01f, 2);
+      //  if (hpCol > 0.01f)
+      //  {
+      //      hpCol = Mathf.Sqrt(hpCol);
+
+       // }
+
+        camCol =  Mathf.Sqrt(hpCol) + (count / 55);
+        camCol = Mathf.Clamp(camCol, 0.01f, 2);
+        camCol2 = camCol - 0.01f;
+        camCol2 = Mathf.Clamp(camCol2, 0.01f, 2);
+
+        if (camCol < 50)
+        {
+            hpCol = health / 55;
+            camCol = (hpCol + count / 55);
+        }
+
+        heatlth2 = health;
         if (SystemInfo.deviceType == DeviceType.Desktop)
         {
-            PlayerTransform.Rotate(0, (Mathf.Clamp((Input.GetAxis("Horizontal") * 5), -3, 16)), 0);
+            PlayerTransform.Rotate(0,Input.GetAxis("Horizontal")*3, 0);
 
             Vector3 targetVelocity = new Vector3(0, 0, Input.GetAxis("Vertical"));
             targetVelocity = PlayerTransform.TransformDirection(targetVelocity);
@@ -128,7 +163,7 @@ public class Player : MonoBehaviour
             PlayCoinBing();
             count = count + 1;
             countText.text = "Skradzione koiny : " + count.ToString();
-            
+
             points = points + 5;
             Destroy(Tomek.gameObject);
 
@@ -138,9 +173,28 @@ public class Player : MonoBehaviour
             }
 
 
+            camCol = (hpCol + count / 10);
+
+
         }
       
     }
+
+
+    void Hit(Collider Przeciwnik)
+    {
+       
+        if(Przeciwnik.gameObject.tag == "Enemy")
+
+            {
+            
+            print(hpCol);
+            }
+        
+       
+    }
+
+
     public void PlayCoinBing()
     {
         coinBing.Play();

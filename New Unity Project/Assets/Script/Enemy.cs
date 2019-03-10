@@ -11,12 +11,12 @@ public class Enemy : MonoBehaviour
         ATTACK
     }
     public State curState;
-    public float speed = .8f;
+    public float speed = 3.5f;
     public float goToDistance = 55;
-    public float attackDistance = 1;
+    public float attackDistance = 0;
     public Transform target;
     public string PlayerTag = "Player";
-    public float attackTimer = 2;
+    public float attackTimer = 0.1f;
     private float curTime;
     private Player playerScript;
 
@@ -80,27 +80,53 @@ public class Enemy : MonoBehaviour
         }
 
 
-        if (Vector3.Distance(target.position, transform.position) > attackDistance)
+        if (Vector3.Distance(target.position, transform.position) > (attackDistance))
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            curTime = curTime - Time.deltaTime;
+        
+            if (curTime < 0 && Vector3.Distance(target.position, transform.position) < (attackDistance+1))
+            {
+                if (playerScript.health > 60)
+                {
+                    playerScript.health = playerScript.health - 5;
+                }
+                if (playerScript.health < 61 && playerScript.health > 27)
+                {
+                    playerScript.health = playerScript.health - 3;
+                }
+                if (playerScript.health < 28)
+                {
+                    playerScript.health--;
+                }
+
+                curTime = attackTimer;
+                print("udany atak w czaSIE");
+            }
+
         }
         else
         {
+           
             curState = State.ATTACK;
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
         }
 
     }
 
 
-    void Attack()
+    void Attack()  //niepotrzebne
     {
-
+        print("atakuje");
+        
         transform.LookAt(target);
         curTime = curTime - Time.deltaTime;
             if(curTime < 0)
         {
             playerScript.health--; 
             curTime = attackTimer;
+            print("udany atak w czaSIE");
         }
 
         if (Vector3.Distance(target.position, transform.position) > attackDistance)
